@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan to Pay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="secondstyle.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e0f7fa; /* Light Blue Background */
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content,
+        .payment-options {
+            flex: 1;
+            padding: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .content {
+            background-color: #039be5; /* Dark Blue Color */
+            color: #fff;
+        }
+
+        .payment-options {
+            background-color: #fff;
+        }
+
+        .partition {
+            border-right: 2px solid #039be5; /* Dark Blue Color */
+        }
+
+        .content:hover,
+        .payment-options:hover {
+            background-color: #f0f0f0;
+        }
+
+        .content h1,
+        .payment-options h1 {
+            text-align: center;
+        }
+
+        .content p {
+            text-align: center;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        .payment-options ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .payment-options li {
+            margin-bottom: 10px;
+        }
+
+        .payment-options label {
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px;
+            border: 2px solid #039be5; /* Dark Blue Color */
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+            background-color: #fff; /* White background */
+        }
+
+        .payment-options label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .payment-options input {
+            margin-right: 5px;
+        }
+
+        #proceedToPaymentButton {
+            background-color: #03a9f4; /* Vivid Blue Color */
+            color: #fff;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        #proceedToPaymentButton:hover {
+            background-color: #0288d1; /* Darker Shade on Hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="content">
+            <h1>SCAN THIS CODE</h1>
+            <p>To Make a Payment</p>
+            <img src="C:\Users\Admin\Downloads\project BriQs\scnpage\gpayimage.jpeg" alt="Payment Success Image">
+        </div>
+        <div class="partition"></div>
+        <div class="payment-options">
+            <h1>Select a Payment Method</h1>
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="paymentOption" value="creditCard">
+                        Credit Card
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="paymentOption" value="paypal">
+                        PayPal
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="paymentOption" value="upi">
+                        UPI
+                    </label>
+                </li>
+            </ul>
+            <button id="proceedToPaymentButton">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('proceedToPaymentButton').addEventListener('click', function () {
+            var selectedPaymentOption = document.querySelector('input[name="paymentOption"]:checked');
+
+            if (selectedPaymentOption) {
+                var paymentOption = selectedPaymentOption.value;
+
+                // Redirect to the payment page based on the selected option
+                var paymentPageURL = getPaymentPageURL(paymentOption);
+                window.location.href = paymentPageURL;
+            } else {
+                alert('Please select a payment option before proceeding.');
+            }
+        });
+
+        function getPaymentPageURL(paymentOption) {
+            // Add logic to determine the URL for each payment option
+            switch (paymentOption) {
+                case 'creditCard':
+                    return 'credit_card_payment.html';
+                case 'paypal':
+                    return 'paypal_payment.html';
+                case 'upi':
+                    return 'upi_payment.html';
+                default:
+                    return 'default_payment.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

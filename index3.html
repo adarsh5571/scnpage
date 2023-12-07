@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #eaf6fd; /* Light Blue Background */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 400px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #007bff; /* Corporate Blue Color */
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+      margin-top: 5px;
+    }
+
+    main {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    main:hover {
+      transform: scale(1.02);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px; /* Added more spacing between fields */
+      box-sizing: border-box;
+      border: 1px solid #007bff; /* Corporate Blue Color */
+      border-radius: 4px;
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    input:focus {
+      border-color: #0056b3; /* Darker Blue on Focus */
+    }
+
+    button {
+      background-color: #007bff; /* Corporate Blue Color */
+      color: #fff;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background-color: #0056b3; /* Darker Shade on Hover */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1 aria-label="Welcome">WELCOME,</h1>
+      <h2>Enter Details and Make a Payment</h2>
+    </header>
+
+    <main>
+      <form id="paymentForm" action="javascript:void(0);" onsubmit="redirectToSecondPage()">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phoneNumber" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+
+        <div class="form-group">
+          <label for="upi">UPI ID:</label>
+          <input type="text" id="upi" name="upiId" placeholder="Enter your UPI ID" required>
+        </div>
+
+        <button type="submit">Proceed to Payment</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <script>
+    function redirectToSecondPage() {
+      // Perform any additional validation if needed
+
+      // Get values from the form
+      var name = document.getElementById('name').value;
+      var phoneNumber = document.getElementById('phone').value;
+      var upiId = document.getElementById('upi').value;
+
+      // Check if all required fields are filled out
+      if (name.trim() === '' || phoneNumber.trim() === '' || upiId.trim() === '') {
+        alert('Please fill out all fields before confirming payment.');
+        return;
+      }
+
+      // Create a URL with query parameters for the second page
+      var secondPageURL = "secondpage.html" +
+        "?name=" + encodeURIComponent(name) +
+        "&phoneNumber=" + encodeURIComponent(phoneNumber) +
+        "&upiId=" + encodeURIComponent(upiId);
+
+      // Open the second page in a new tab or window
+      window.open(secondPageURL, "_blank");
+    }
+  </script>
+
+</body>
+</html>
